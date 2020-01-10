@@ -13,7 +13,6 @@ class App extends Component {
     this.state = {
       breweries: BREWERIESDB
     };
-
   }
   render() {
     console.log(BREWERIESDB);
