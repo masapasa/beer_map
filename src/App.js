@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { BREWERIESDB } from './shared/breweriesdb';
 import Header from './components/header/header.component';
 import Homepage from './pages/homepage/homepage.component';
+import Map from './pages/map/map.component';
 import Footer from './components/footer/footer.component';
 import './App.scss';
 
@@ -22,6 +23,7 @@ class App extends Component {
               <main role='main'>
                   <Switch>
                       <Route exact path='/' component={Homepage} />
+                      <Route exact path='/map' component={Map} />
                       <Redirect to='/' />
                   </Switch>
               </main>
