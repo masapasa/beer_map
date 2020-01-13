@@ -8,24 +8,20 @@ import './map.styles.scss';
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2VsY2VldXMiLCJhIjoiY2s0Mzh1NjFvMDJvcDNlbmFkejMyMHdjNyJ9.t-rxQRKpzYDBstSg-_QSUQ';
 
 class Map extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             viewport: {
-              latitude: 39.113014,
-              longitude: -105.358887,
-              zoom: 7,
-              bearing: 0,
-              pitch: 0
+                latitude: 39.113014,
+                longitude: -105.358887,
+                zoom: 7,
+                bearing: 0,
+                pitch: 0
             }
         };
     }
-
     render() {
-
         const {viewport} = this.state;
-
         return(
             <section className='map'>
                 <MapGL

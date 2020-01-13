@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { BREWERIESDB } from './shared/breweriesdb';
+import Loader from './components/utilities/loader.component';
 import Header from './components/header/header.component';
 import Homepage from './pages/homepage/homepage.component';
 import Map from './pages/map/map.component';
@@ -12,13 +13,26 @@ class App extends Component {
     super(props);
 
     this.state = {
-      breweries: BREWERIESDB
+      //Connect to Wordpress API
+      breweries: BREWERIESDB,
+      isLoading: true
     };
   }
+
+  componentDidMount() {
+    this.setState({isLoading: false})
+  }
+
   render() {
-    console.log(BREWERIESDB);
-    return (
-      <div className='container-fluid'>
+
+    const { isLoading } = this.state;
+
+    if(isLoading) {
+      return <Loader />;
+    }
+    else {
+      return(
+        <div className='container-fluid'>
           <Header />
               <main role='main'>
                   <Switch>
@@ -29,7 +43,8 @@ class App extends Component {
               </main>
           <Footer />
       </div>
-    );
+      );
+    }
   }
 }
 
