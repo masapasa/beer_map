@@ -7,14 +7,6 @@ import './map.styles.scss';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2VsY2VldXMiLCJhIjoiY2s0Mzh1NjFvMDJvcDNlbmFkejMyMHdjNyJ9.t-rxQRKpzYDBstSg-_QSUQ';
 
-const geolocateStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    margin: 10,
-    overflow: 'hidden'
-  };
-
 class Map extends Component {
 
     constructor(props) {
@@ -30,8 +22,6 @@ class Map extends Component {
         };
     }
 
-    _onViewportChange = viewport => this.setState({viewport});
-
     render() {
 
         const {viewport} = this.state;
@@ -43,23 +33,27 @@ class Map extends Component {
                     width="95vw"
                     height="100vh"
                     mapStyle="mapbox://styles/mapbox/light-v10"
-                    onViewportChange={this._onViewportChange}
+                    onViewportChange={viewport => this.setState({viewport})}
                     mapboxApiAccessToken={MAPBOX_TOKEN}
                 >
                     <Marker latitude={39.113014} longitude={-105.358887} offsetLeft={-20} offsetTop={-10}>
-                    <h2><Pin />Hello</h2>
+                        <Pin />
                     </Marker>
                     <div style={{position: 'absolute', top: 10, right: 10}}>
-                    <NavigationControl />
+                        <NavigationControl />
                     </div>
                     <GeolocateControl
-                        style={geolocateStyle}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            margin: 10,
+                            overflow: 'hidden'
+                        }}
                         positionOptions={{enableHighAccuracy: true}}
                         fitBoundsOptions={{maxZoom: 8}}
-                        label={"You are Here"}
                         trackUserLocation={true}
                     />
-
                 </MapGL>
                 <MapSearch />
             </section>
