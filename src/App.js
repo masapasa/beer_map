@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { BREWERIESDB } from './shared/breweriesdb';
+import axios from 'axios';
 import Loader from './components/utilities/loader.component';
 import Header from './components/header/header.component';
 import Homepage from './pages/homepage/homepage.component';
@@ -14,18 +14,29 @@ class App extends Component {
 
     this.state = {
       //Connect to Wordpress API
-      breweries: BREWERIESDB,
+      breweries: [],
       isLoading: true
     };
   }
 
-  componentDidMount() {
-    this.setState({isLoading: false})
+  async componentDidMount() {
+
+    this.setState({isLoading: false});
+
+    await axios.get('https://coloradobeermap.com/wp-json/wp/v2/brewery')
+    .then(res => {
+      const breweries = res.data;
+      this.setState({ breweries });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   render() {
-
-    const { isLoading } = this.state;
+    
+    const { isLoading, breweries } = this.state;
+    console.log(breweries);
 
     if(isLoading) {
       return <Loader />;
