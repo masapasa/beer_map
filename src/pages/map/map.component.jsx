@@ -1,28 +1,10 @@
-import React, { Component, PureComponent } from 'react';
+import React, { Component } from 'react';
 import MapGL, { GeolocateControl, NavigationControl, Marker } from 'react-map-gl';
 import MapSearch from '../../components/map-search/map-search.component';
-import Pin from '../../components/map-utilities/pin.component';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './map.styles.scss';
 
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2VsY2VldXMiLCJhIjoiY2s0Mzh1NjFvMDJvcDNlbmFkejMyMHdjNyJ9.t-rxQRKpzYDBstSg-_QSUQ';
-
-class Markers extends PureComponent {
-    render() {
-      const { data } = this.props;
-      console.log( data );
-      return data.map(
-        city => 
-            <Marker 
-                key={city.name} 
-                longitude={city.longitude} 
-                latitude={city.latitude} 
-            >
-                <Pin />
-            </Marker>
-      )
-    }
-  }
 
 class Map extends Component {
     constructor(props) {
@@ -39,7 +21,7 @@ class Map extends Component {
         };
     }
     render() {
-        const {viewport, brewdata } = this.state;
+        const {viewport, showPopup, brewdata } = this.state;
         return(
             <section className='map'>
                 <MapGL
@@ -50,11 +32,8 @@ class Map extends Component {
                     onViewportChange={viewport => this.setState({viewport})}
                     mapboxApiAccessToken={MAPBOX_TOKEN}
                 >
-
-                    <Markers data={this.state.brewdata} />
-
                     <div style={{position: 'absolute', top: 10, right: 10}}>
-                        <NavigationControl />
+                            <NavigationControl />
                     </div>
                     <GeolocateControl
                         style={{
@@ -68,8 +47,30 @@ class Map extends Component {
                         fitBoundsOptions={{maxZoom: 8}}
                         trackUserLocation={true}
                     />
+                    {
+                        brewdata.map(
+                            brew => 
+                            <Marker 
+                                key={brew.id}
+                                latitude={parseFloat(brew.acf.location.lat)}
+                                longitude={parseFloat(brew.acf.location.long)} 
+                                offsetLeft={-20} 
+                                offsetTop={-10}
+                            >   
+                                <button
+                                    className='map-btn'
+                                    onCLick={e => {
+                                        e.preventDefault();
+                                    }}
+                                >
+                                    <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${brew.title.rendered} Icon`}/>
+                                </button>
+                            </Marker>
+                        )
+                    }
+
                 </MapGL>
-                <MapSearch breweryInfo={this.state.brewdata}/>
+                <MapSearch breweryInfo={this.state.brewery}/>
             </section>
         );
     }
