@@ -21,7 +21,7 @@ class Map extends Component {
         };
     }
     render() {
-        const {viewport, showPopup, brewdata } = this.state;
+        const {viewport, brewdata } = this.state;
         return(
             <section className='map'>
                 <MapGL
@@ -59,9 +59,6 @@ class Map extends Component {
                             >   
                                 <button
                                     className='map-btn'
-                                    onCLick={e => {
-                                        e.preventDefault();
-                                    }}
                                 >
                                     <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${brew.title.rendered} Icon`}/>
                                 </button>

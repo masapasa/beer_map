@@ -23,7 +23,7 @@ class App extends Component {
 
     this.setState({isLoading: false});
 
-    await axios.get('https://coloradobeermap.com/wp-json/wp/v2/brewery')
+    await axios.get('https://coloradobeermap.com/wp-json/wp/v2/brewery?per_page=100')
     .then(res => {
       const breweries = res.data;
       this.setState({ breweries });
@@ -47,7 +47,7 @@ class App extends Component {
           <Header />
               <main role='main'>
                   <Switch>
-                      <Route exact path='/' component={Homepage} />
+                      <Route exact path='/' render={() => <Homepage brewerydata={breweries} />} />
                       <Route exact path='/map' render={() => <Map brewerydata={breweries} />} />
                       <Redirect to='/' />
                   </Switch>
