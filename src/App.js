@@ -53,7 +53,7 @@ class App extends Component {
                   </Switch>
               </main>
           <Footer />
-      </div>
+        </div>
       );
     }
   }
