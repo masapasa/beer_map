@@ -19,6 +19,7 @@ class Map extends Component {
                 pitch: 0
             }
         };
+        console.log(this.props.breweryData);
     }
     render() {
         const {viewport} = this.state;
@@ -51,7 +52,7 @@ class Map extends Component {
                         trackUserLocation={true}
                     />
                 </MapGL>
-                <MapSearch />
+                <MapSearch breweryInfo={this.state.brewery}/>
             </section>
         );
     }

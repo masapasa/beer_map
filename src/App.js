@@ -31,12 +31,12 @@ class App extends Component {
     .catch(function (error) {
       console.log(error);
     });
+
   }
 
   render() {
     
-    const { isLoading, breweries } = this.state;
-    console.log(breweries);
+    const { isLoading, breweries } = this.state
 
     if(isLoading) {
       return <Loader />;
@@ -48,7 +48,7 @@ class App extends Component {
               <main role='main'>
                   <Switch>
                       <Route exact path='/' component={Homepage} />
-                      <Route exact path='/map' component={Map} />
+                      <Route exact path='/map' render={() => <Map breweryData={breweries} />} />
                       <Redirect to='/' />
                   </Switch>
               </main>
