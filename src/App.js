@@ -48,7 +48,7 @@ class App extends Component {
               <main role='main'>
                   <Switch>
                       <Route exact path='/' component={Homepage} />
-                      <Route exact path='/map' render={() => <Map breweryData={breweries} />} />
+                      <Route exact path='/map' render={() => <Map brewerydata={breweries} />} />
                       <Redirect to='/' />
                   </Switch>
               </main>
