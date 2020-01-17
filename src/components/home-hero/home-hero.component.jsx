@@ -1,10 +1,14 @@
 import React from 'react';
-import { Container, Jumbotron, Button } from 'reactstrap';
+import { 
+    Container, 
+    Jumbotron, 
+    Button 
+} from 'reactstrap';
 import './home-hero.styles.scss';
 
 const HomeHero = props => {
     return(
-        <Jumbotron fluid className="home-jumbo">
+        <Jumbotron fluid className="home-hero">
             <Container>
                 <h1 className="display-3">{props.headline}</h1>
                 <p className="lead">{props.content}</p>
