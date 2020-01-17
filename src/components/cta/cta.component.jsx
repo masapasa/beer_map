@@ -2,7 +2,7 @@ import React from 'react';
 import CtaButton from '../utilities/cta-button.component';
 import './cta.styles.scss';
 
-const Cta = (props) => {
+const Cta = props => {
     return(
         <section className="container py-3 px-0 cta-callout my-5">
             <div className="row border-0 m-0 p-5">

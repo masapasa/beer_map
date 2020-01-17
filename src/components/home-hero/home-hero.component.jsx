@@ -9,9 +9,9 @@ const HomeHero = props => {
             <Container>
                 <h1 className="display-3">{props.headline}</h1>
                 <p className="lead">{props.content}</p>
-                <p className="lead">
+                <div className="lead">
                     <CtaButton button={props.buttonText} /> 
-                </p>
+                </div>
             </Container>
         </Jumbotron>
     );
