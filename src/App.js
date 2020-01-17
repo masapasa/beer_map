@@ -5,6 +5,7 @@ import Loader from './components/utilities/loader.component';
 import Header from './components/header/header.component';
 import Homepage from './pages/homepage/homepage.component';
 import Map from './pages/map/map.component';
+import DetailedListing from './pages/detailed-listing/detailed-listing.component';
 import Footer from './components/footer/footer.component';
 import './App.scss';
 
@@ -46,7 +47,8 @@ class App extends Component {
               <main role='main'>
                   <Switch>
                       <Route exact path='/' render={() => <Homepage brewerydata={breweries} />} />
-                      <Route exact path='/map' render={() => <Map brewerydata={breweries} />} />
+                      <Route path='/map' render={() => <Map brewerydata={breweries} />} />
+                      <Route path='/detailed-listing' render={() => <DetailedListing brewerydata={breweries} />} />
                       <Redirect to='/' />
                   </Switch>
               </main>
