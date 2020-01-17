@@ -8,16 +8,10 @@ import Map from './pages/map/map.component';
 import Footer from './components/footer/footer.component';
 import './App.scss';
 
-console.log(process.env.REACT_APP_MAPBOX_TOKEN)
-console.log(process.env.REACT_APP_JWT_API_TOKEN )
-console.log(process.env.REACT_APP_BRERWERY_ENDPOINT)
-
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      //Connect to Wordpress API
       breweries: [],
       isLoading: true
     };
@@ -47,7 +41,7 @@ class App extends Component {
     }
     else {
       return(
-        <div className='container-fluid'>
+        <div >
           <Header />
               <main role='main'>
                   <Switch>

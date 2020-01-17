@@ -3,7 +3,7 @@ import './map-search.styles.scss';
 
 const MapSearch = () => {
     return(
-        <footer>Map Search</footer>
+        <section>Map Search</section>
     );
 }
 
