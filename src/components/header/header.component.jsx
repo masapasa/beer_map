@@ -47,7 +47,7 @@ class Header extends Component {
 
         return(
             <React.Fragment>
-                <Navbar role="navigation" sticky="top" dark="true" color="primary" expand="md" fixed="true">
+                <Navbar dark role="navigation" sticky="top" color="secondary" expand="md" fixed="true">
                     <div className="container-fluid">
                         <NavbarBrand className="mr-auto" href="/">Colorado Beer Map</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNav} />
@@ -58,7 +58,7 @@ class Header extends Component {
                                         Listings
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        <DropdownItem tag="a" href="/city-listing/boulder">Boulder</DropdownItem>
+                                        <DropdownItem tag="a" href="/city-listing/boulder" test={'test'}>Boulder</DropdownItem>
                                         <DropdownItem tag="a" href="/city-listing/colorado-springs">Colorado Springs</DropdownItem>
                                         <DropdownItem tag="a" href="/city-listing/denver">Denver</DropdownItem>
                                         <DropdownItem tag="a" href="/city-listing/durango">Durango</DropdownItem>

@@ -5,7 +5,7 @@ import './city-listing.styles.scss';
 const CityListing = props => {
     return(
         <section className="city-listing">
-            <Hero headline={'city listing'} />
+            <Hero headline={props.cityName} />
         </section>
     );
 }
