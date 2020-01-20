@@ -13,9 +13,6 @@ const Footer = () => {
                     <button className="btn btn-secondary btn-lg btn-block">Learn More!</button>
                 </div>
             </div>
-            <div className="col bg-dark" style={{height:'150px'}}>
-
-            </div>
         </footer>
     );
 }

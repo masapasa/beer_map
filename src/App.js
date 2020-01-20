@@ -8,6 +8,7 @@ import Map from './pages/map/map.component';
 import DetailedListing from './pages/detailed-listing/detailed-listing.component';
 import CityListing from './pages/city-listing/city-listing.component';
 import Contact from './pages/contact/contact.component';
+import Signup from './pages/sign-up/sign-up.component';
 import Footer from './components/footer/footer.component';
 import './App.scss';
 
@@ -49,10 +50,11 @@ class App extends Component {
               <main role='main'>
                   <Switch>
                       <Route exact path='/' render={() => <Homepage brewerydata={breweries} />} />
+                      <Route path='/city-listing/:cityName' render={() => <CityListing brewerydata={breweries} />} />
                       <Route path='/map' render={() => <Map brewerydata={breweries} />} />
                       <Route path='/detailed-listing' render={() => <DetailedListing brewerydata={breweries} />} />
-                      <Route path='/city-listing/:cityName' render={() => <CityListing brewerydata={breweries} />} />
                       <Route path='/contact' component={Contact} />
+                      <Route path='/sign-up' component={Signup} />
                       <Redirect to='/' />
                   </Switch>
               </main>

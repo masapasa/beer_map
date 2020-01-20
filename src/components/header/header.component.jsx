@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import { 
-    Nav, 
-    Navbar,
-    NavbarBrand,
-    NavbarToggler, 
-    Collapse, 
-    NavItem, 
-    Modal, 
-    ModalHeader, 
-    ModalBody,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Button 
+    Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem,
+    UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
+    Modal, ModalHeader, ModalBody,
+    Form, FormGroup ,Label, Input, Button
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import './header.styles.scss';
@@ -23,17 +13,14 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            isNavOpen: false
+            isNavOpen: false,
+            isModalOpen: false
         };
 
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
 
-    }
-
-    componentDidMount() {
-        console.log(this.state.brewdata);
     }
 
     toggleNav() {
@@ -56,39 +43,46 @@ class Header extends Component {
 
     render() {
 
-        const {isNavOpen } = this.state;
+        const {isNavOpen} = this.state;
 
         return(
-            <header>
-                <Navbar role="navigation" sticky="top" expand="md" fixed="true">
+            <React.Fragment>
+                <Navbar role="navigation" sticky="top" dark="true" color="primary" expand="md" fixed="true">
                     <div className="container-fluid">
                         <NavbarBrand className="mr-auto" href="/">Colorado Beer Map</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNav} />
                         <Collapse isOpen={isNavOpen} navbar>
                             <Nav navbar className="navbar-nav ml-auto">
-                                <NavItem >
-                                    <NavLink className="nav-link" to="/home">Home</NavLink>
-                                </NavItem>
+                                <UncontrolledDropdown>
+                                    <DropdownToggle tag="a" className="nav-link" caret>
+                                        Listings
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem tag="a" href="/city-listing/boulder">Boulder</DropdownItem>
+                                        <DropdownItem tag="a" href="/city-listing/colorado-springs">Colorado Springs</DropdownItem>
+                                        <DropdownItem tag="a" href="/city-listing/denver">Denver</DropdownItem>
+                                        <DropdownItem tag="a" href="/city-listing/durango">Durango</DropdownItem>
+                                        <DropdownItem tag="a" href="/city-listing/ft-collins">Ft. Collins</DropdownItem>
+                                        <DropdownItem tag="a" href="/city-listing/pueblo">Pueblo</DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/map">Map</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/city-listing">Listings</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/contact">Contact</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/map">Sign Up!</NavLink>
+                                    <NavLink className="nav-link" to="/sign-up">Sign Up</NavLink>
                                 </NavItem>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/map">Login</NavLink>
-                                </NavItem>
-
+                                <Button outline size="sm" onClick={this.toggleModal}>
+                                    <i className="fa fa-angle-right" aria-hidden="true" /> Login
+                                </Button>
                             </Nav>
                         </Collapse>
                     </div>
                 </Navbar>
+
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
                     <ModalBody>
@@ -111,10 +105,10 @@ class Header extends Component {
                         </Form>
                     </ModalBody>
                 </Modal>
-            </header>
+
+            </React.Fragment>
         );
     }
 }
     
-
 export default Header;
