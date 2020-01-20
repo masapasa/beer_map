@@ -1,5 +1,20 @@
 import React, { Component } from 'react';
-import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { 
+    Nav, 
+    Navbar,
+    NavbarBrand,
+    NavbarToggler, 
+    Collapse, 
+    NavItem, 
+    Modal, 
+    ModalHeader, 
+    ModalBody,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Button 
+} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import './header.styles.scss';
 
@@ -15,6 +30,10 @@ class Header extends Component {
         this.toggleModal = this.toggleModal.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
 
+    }
+
+    componentDidMount() {
+        console.log(this.state.brewdata);
     }
 
     toggleNav() {
@@ -36,19 +55,28 @@ class Header extends Component {
     }
 
     render() {
+
+        const {isNavOpen } = this.state;
+
         return(
             <header>
                 <Navbar role="navigation" sticky="top" expand="md" fixed="true">
                     <div className="container-fluid">
                         <NavbarBrand className="mr-auto" href="/">Colorado Beer Map</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNav} />
-                        <Collapse isOpen={this.state.isNavOpen} navbar>
+                        <Collapse isOpen={isNavOpen} navbar>
                             <Nav navbar className="navbar-nav ml-auto">
                                 <NavItem >
                                     <NavLink className="nav-link" to="/home">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/map">Find Beer</NavLink>
+                                    <NavLink className="nav-link" to="/map">Map</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/city-listing">Listings</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/contact">Contact</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/map">Sign Up!</NavLink>

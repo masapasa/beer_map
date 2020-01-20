@@ -1,9 +1,12 @@
 import React from 'react';
+import Hero from '../../components/utilities/hero.component';
 import './city-listing.styles.scss';
 
-const CityListing = () => {
+const CityListing = props => {
     return(
-        <h1>City Listing</h1>
+        <section className="city-listing">
+            <Hero headline={'city listing'} />
+        </section>
     );
 }
 
