@@ -36,7 +36,7 @@ class Header extends Component {
     }
 
     handleLogin(event) {
-        alert(`Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`);
+        console.log(`Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`);
         this.toggleModal();
         event.preventDefault();
     }
@@ -54,7 +54,7 @@ class Header extends Component {
                         <Collapse isOpen={isNavOpen} navbar>
                             <Nav navbar className="navbar-nav ml-auto">
                                 <UncontrolledDropdown>
-                                    <DropdownToggle tag="a" className="nav-link" caret>
+                                    <DropdownToggle className="nav-link" caret>
                                         Listings
                                     </DropdownToggle>
                                     <DropdownMenu>
@@ -91,7 +91,7 @@ class Header extends Component {
                                             Denver
                                             </Link>
                                         </DropdownItem>
-                                        <DropdownItem tag="a" href="/city-listing/durango">
+                                        <DropdownItem>
                                             <Link to={{
                                                     pathname: "/city-listing/durango",
                                                     state: { 
