@@ -5,7 +5,7 @@ import {
     Modal, ModalHeader, ModalBody,
     Form, FormGroup ,Label, Input, Button
 } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './header.styles.scss';
 
 class Header extends Component {
@@ -58,12 +58,72 @@ class Header extends Component {
                                         Listings
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        <DropdownItem tag="a" href="/city-listing/boulder" test={'test'}>Boulder</DropdownItem>
-                                        <DropdownItem tag="a" href="/city-listing/colorado-springs">Colorado Springs</DropdownItem>
-                                        <DropdownItem tag="a" href="/city-listing/denver">Denver</DropdownItem>
-                                        <DropdownItem tag="a" href="/city-listing/durango">Durango</DropdownItem>
-                                        <DropdownItem tag="a" href="/city-listing/ft-collins">Ft. Collins</DropdownItem>
-                                        <DropdownItem tag="a" href="/city-listing/pueblo">Pueblo</DropdownItem>
+                                        <DropdownItem>
+                                            <Link to={{
+                                                pathname: "/city-listing/boulder",
+                                                state: { 
+                                                    cityName: 'Boulder' 
+                                                }
+                                            }}
+                                            >
+                                            Boulder
+                                            </Link>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <Link to={{
+                                                    pathname: "/city-listing/colorado-springs",
+                                                    state: { 
+                                                        cityName: 'Colorado Springs' 
+                                                    }
+                                                }}
+                                            >
+                                            Colorado Springs
+                                            </Link>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <Link to={{
+                                                    pathname: "/city-listing/denver",
+                                                    state: { 
+                                                        cityName: 'Denver' 
+                                                    }
+                                                }}
+                                            >
+                                            Denver
+                                            </Link>
+                                        </DropdownItem>
+                                        <DropdownItem tag="a" href="/city-listing/durango">
+                                            <Link to={{
+                                                    pathname: "/city-listing/durango",
+                                                    state: { 
+                                                        cityName: 'Durango' 
+                                                    }
+                                                }}
+                                            >
+                                            Durango
+                                            </Link>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <Link to={{
+                                                    pathname: "/city-listing/ft-collins",
+                                                    state: { 
+                                                        cityName: 'Ft. Collins' 
+                                                    }
+                                                }}
+                                            >
+                                            Ft. Collins
+                                            </Link>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <Link to={{
+                                                    pathname: "/city-listing/pueblo",
+                                                    state: { 
+                                                        cityName: 'Pueblo' 
+                                                    }
+                                                }}
+                                            >
+                                            Pueblo
+                                            </Link>
+                                        </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                                 <NavItem>

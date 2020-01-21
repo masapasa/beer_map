@@ -44,7 +44,7 @@ class Map extends Component {
                             overflow: 'hidden'
                         }}
                         positionOptions={{enableHighAccuracy: true}}
-                        fitBoundsOptions={{maxZoom: 8}}
+                        fitBoundsOptions={{maxZoom: 7}}
                         trackUserLocation={true}
                     />
                     {

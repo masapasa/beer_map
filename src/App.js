@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Loader from './components/utilities/loader.component';
@@ -48,15 +49,25 @@ class App extends Component {
         <div >
           <Header />
               <main role='main'>
-                  <Switch>
-                      <Route exact path='/' render={() => <Homepage brewerydata={breweries} />} />
-                      <Route path='/city-listing/:cityName' render={() => <CityListing brewerydata={breweries} />} />
-                      <Route path='/map' render={() => <Map brewerydata={breweries} />} />
-                      <Route path='/detailed-listing/:breweryId' render={() => <DetailedListing brewerydata={breweries} />} />
-                      <Route path='/contact' component={Contact} />
-                      <Route path='/sign-up' component={Signup} />
-                      <Redirect to='/' />
-                  </Switch>
+                <Route render={({location}) => (
+                  <TransitionGroup>
+                    <CSSTransition
+                      key={location.key}
+                      classNames="fade"
+                      timeout={2000}
+                    >
+                      <Switch>
+                          <Route exact path='/' render={() => <Homepage brewerydata={breweries} />} />
+                          <Route path='/city-listing/:cityName' component={CityListing}  />
+                          <Route path='/map' render={() => <Map brewerydata={breweries} />} />
+                          <Route path='/detailed-listing/:breweryId' render={() => <DetailedListing brewerydata={breweries} />} />
+                          <Route path='/contact' component={Contact} />
+                          <Route path='/sign-up' component={Signup} />
+                          <Redirect to='/' />
+                      </Switch>
+                    </CSSTransition>
+                  </TransitionGroup>
+                )} />
               </main>
           <Footer />
         </div>
