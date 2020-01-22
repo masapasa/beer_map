@@ -14,9 +14,9 @@ class CityListing extends Component {
         };
     }
 
-    async componentDidMount () {
+    componentDidMount () {
         
-        await axios.get('https://coloradobeermap.com/wp-json/wp/v2/brewery?per_page=100')
+        axios.get('https://coloradobeermap.com/wp-json/wp/v2/brewery?per_page=100')
         .then(res => {
             this.setState({ breweries: res.data });
         })
@@ -31,9 +31,7 @@ class CityListing extends Component {
         const { city } = this.state;
 
         const renderList = Object.entries(this.state.breweries).map(brewery => {
-
             const breweryListing = brewery[1];
-
             if(breweryListing.acf.location.city === city){
                 return(
                     <div key={breweryListing.id} className="col-md-6 my-3">

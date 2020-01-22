@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { baseUrl } from './shared/sharedKeys';
 import Loader from './components/utilities/loader.component';
 import Header from './components/header/header.component';
 import Homepage from './pages/homepage/homepage.component';
@@ -14,19 +15,17 @@ import Footer from './components/footer/footer.component';
 import './App.scss';
 
 class App extends Component {
+
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
       breweries: [],
       isLoading: true
     };
-  }
 
-  async componentDidMount() {
-
-    this.setState({isLoading: false});
-
-    await axios.get('https://coloradobeermap.com/wp-json/wp/v2/brewery?per_page=100')
+    axios.get( baseUrl )
     .then(res => {
       const breweries = res.data;
       this.setState({ breweries });
@@ -34,7 +33,15 @@ class App extends Component {
     .catch(function (error) {
       console.log(error);
     });
+  }
 
+  componentDidMount() {
+    this._isMounted = true;
+    this.setState({isLoading: false});
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {

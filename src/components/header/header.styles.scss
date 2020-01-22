@@ -1,0 +1,18 @@
+.btn {
+
+    &-sm {
+        line-height: 0.25;
+        border-radius: .15rem;
+        padding: 0px 15px;
+        display: inline-block;
+        margin-left: 2vw;
+    }
+
+    &-outline {
+        
+        &-secondary {
+            color: #fff;
+            border-color: #fff;
+        }
+    }
+}
