@@ -39,7 +39,7 @@ class App extends Component {
 
   render() {
     
-    const { isLoading, breweries } = this.state
+    const { isLoading, breweries } = this.state;
 
     if(isLoading) {
       return <Loader />;

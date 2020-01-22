@@ -106,7 +106,7 @@ class Header extends Component {
                                             <Link to={{
                                                     pathname: "/city-listing/ft-collins",
                                                     state: { 
-                                                        cityName: 'Ft. Collins' 
+                                                        cityName: 'Fort Collins' 
                                                     }
                                                 }}
                                             >

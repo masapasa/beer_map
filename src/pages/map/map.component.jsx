@@ -67,7 +67,7 @@ class Map extends Component {
                     }
 
                 </MapGL>
-                <MapSearch breweryInfo={this.state.brewery}/>
+                <MapSearch />
             </section>
         );
     }
