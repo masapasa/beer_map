@@ -67,7 +67,7 @@ class App extends Component {
                           <Route exact path='/' render={() => <Homepage brewerydata={breweries} />} />
                           <Route path='/city-listing/:cityName' component={CityListing}  />
                           <Route path='/map' render={() => <Map brewerydata={breweries} />} />
-                          <Route path='/detailed-listing/:breweryId' render={() => <DetailedListing brewerydata={breweries} />} />
+                          <Route exact path='/detailed-listing/:breweryId' render={() => <DetailedListing brewerydata={breweries} />} />
                           <Route path='/contact' component={Contact} />
                           <Route path='/sign-up' component={Signup} />
                           <Redirect to='/' />

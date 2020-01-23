@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Label, Row, Col } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import Hero from '../../components/utilities/hero.component';
+import Featured from '../../components/featured/featured.component';
 import './sign-up.styles.scss';
 
 const required = val => val && val.length;
@@ -193,6 +194,7 @@ class Signup extends Component {
                     </div>
                 </div>
                 </div>
+                <Featured sectionHeader={'Featured Breweries'} />
             </section>
         );
     }
