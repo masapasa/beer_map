@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
 import axios from 'axios';
 import Hero from '../../components/utilities/hero.component';
 import './city-listing.styles.scss';
+import { cityQuery } from '../../shared/sharedKeys';
 
 class CityListing extends Component {
 
@@ -10,35 +12,43 @@ class CityListing extends Component {
         this.state = {
           breweries: [],
           city: this.props.location.state.cityName,
+          cityQ: this.props.location.state.cityId,
           isLoading: true
         };
     }
 
-    componentDidMount () {
-        
-        axios.get('https://coloradobeermap.com/wp-json/wp/v2/brewery?per_page=100')
-        .then(res => {
-            this.setState({ breweries: res.data });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    getCityBreweries = async () => {
+        await axios
+            .get( cityQuery + this.state.cityQ )
+            .then(res => {
+                this.setState({ breweries: res.data });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
 
+    componentDidMount () {
+        this.setState({ isLoading: false });
+        this.getCityBreweries();
     }
 
     render() {
 
-        const { city } = this.state;
-
-        const renderList = Object.entries(this.state.breweries).map(brewery => {
+        const { city, breweries } = this.state;
+   
+        const renderList = Object.entries(breweries).map(brewery => {
             const breweryListing = brewery[1];
-            if(breweryListing.acf.location.city === city){
-                return(
-                    <div key={breweryListing.id} className="col-md-6 my-3">
-                        {`${breweryListing.acf.location.city} - ${breweryListing.title.rendered}`}
-                    </div>
-                );
-            }
+            return(
+                <Card key={breweryListing.id} className="col-md-3 my-3 mx-3">
+                    
+                    <CardBody>
+                        <CardTitle><h6>{breweryListing.title.rendered}</h6></CardTitle>
+                        <CardText></CardText>
+                        <CardFooter></CardFooter>
+                    </CardBody>
+                </Card>
+            );
         });
 
         return(

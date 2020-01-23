@@ -55,14 +55,15 @@ class Header extends Component {
                             <Nav navbar className="navbar-nav ml-auto">
                                 <UncontrolledDropdown>
                                     <DropdownToggle className="nav-link" caret>
-                                        Listings
+                                        Cities
                                     </DropdownToggle>
                                     <DropdownMenu>
                                         <DropdownItem>
                                             <Link to={{
                                                 pathname: "/city-listing/boulder",
                                                 state: { 
-                                                    cityName: 'Boulder' 
+                                                    cityName: 'Boulder',
+                                                    cityId: 164
                                                 }
                                             }}
                                             >
@@ -73,7 +74,8 @@ class Header extends Component {
                                             <Link to={{
                                                     pathname: "/city-listing/colorado-springs",
                                                     state: { 
-                                                        cityName: 'Colorado Springs' 
+                                                        cityName: 'Colorado Springs',
+                                                        cityId: 162
                                                     }
                                                 }}
                                             >
@@ -84,7 +86,8 @@ class Header extends Component {
                                             <Link to={{
                                                     pathname: "/city-listing/denver",
                                                     state: { 
-                                                        cityName: 'Denver' 
+                                                        cityName: 'Denver',
+                                                        cityId: 161
                                                     }
                                                 }}
                                             >
@@ -95,7 +98,8 @@ class Header extends Component {
                                             <Link to={{
                                                     pathname: "/city-listing/durango",
                                                     state: { 
-                                                        cityName: 'Durango' 
+                                                        cityName: 'Durango',
+                                                        cityId: 166
                                                     }
                                                 }}
                                             >
@@ -106,7 +110,8 @@ class Header extends Component {
                                             <Link to={{
                                                     pathname: "/city-listing/ft-collins",
                                                     state: { 
-                                                        cityName: 'Fort Collins' 
+                                                        cityName: 'Fort Collins',
+                                                        cityId: 163
                                                     }
                                                 }}
                                             >
@@ -117,11 +122,24 @@ class Header extends Component {
                                             <Link to={{
                                                     pathname: "/city-listing/pueblo",
                                                     state: { 
-                                                        cityName: 'Pueblo' 
+                                                        cityName: 'Pueblo',
+                                                        cityId: 167
                                                     }
                                                 }}
                                             >
                                             Pueblo
+                                            </Link>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <Link to={{
+                                                    pathname: "/city-listing/summit-county",
+                                                    state: { 
+                                                        cityName: 'Summit County',
+                                                        cityId: 165
+                                                    }
+                                                }}
+                                            >
+                                            Summit County
                                             </Link>
                                         </DropdownItem>
                                     </DropdownMenu>
