@@ -22,6 +22,7 @@ class Map extends Component {
                 pitch: 0
             },
             isLoading: true,
+            showPopup: true,
             breweries:[]
         }
     }
@@ -31,6 +32,7 @@ class Map extends Component {
             .get( baseUrl )
             .then(res => {
                 this.setState({ breweries: res.data });
+                console.log(this.state.breweries)
             })
             .catch(function (error) {
                 console.log(error);
@@ -55,19 +57,21 @@ class Map extends Component {
         const renderMarkers = Object.entries(breweries).map(brewery => {
             const breweryListing = brewery[1];
             return(
-                <Marker 
-                    key={breweryListing.id}
-                    latitude={parseFloat(breweryListing.acf.location.lat)}
-                    longitude={parseFloat(breweryListing.acf.location.long)} 
-                    offsetLeft={-20} 
-                    offsetTop={-10}
-                >   
-                    <button
-                        className='map-btn'
-                    >
-                        <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${this.decodeEntities(breweryListing.title.rendered)} Icon`}/>
-                    </button>
-                </Marker>
+                <React.Fragment>
+                    <Marker 
+                        key={breweryListing.id}
+                        latitude={parseFloat(breweryListing.acf.location.lat)}
+                        longitude={parseFloat(breweryListing.acf.location.long)} 
+                        offsetLeft={-20} 
+                        offsetTop={-10}
+                    >   
+                        <button
+                            className='map-btn'
+                        >
+                            <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${this.decodeEntities(breweryListing.title.rendered)} Icon`}/>
+                        </button>
+                    </Marker>
+                </React.Fragment>
             );
         });
 
