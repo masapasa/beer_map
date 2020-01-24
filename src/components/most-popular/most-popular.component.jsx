@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
 import axios from 'axios';
-import { featureUrl } from '../../shared/sharedKeys';
-import './featured.styles.scss';
+import { popularUrl } from '../../shared/sharedKeys';
+import './most-popular.styles.scss';
 
-class Featured extends Component {
+class MostPopular extends Component {
     constructor(props) {
         super(props);
         this.state = {
             breweries: [],
-            sectionHeader: 'Featured Breweries'
+            sectionHeader: 'Most Popular'
         }
     }
 
-    getFeaturedBreweries = async () => {
+    getPopularBreweries = async () => {
         await axios
-            .get( featureUrl )
+            .get( popularUrl )
             .then(res => {
                 this.setState({ breweries: res.data });
             })
@@ -32,14 +32,14 @@ class Featured extends Component {
 
     componentDidMount () {
         this.setState({isLoading: false});
-        this.getFeaturedBreweries();
+        this.getPopularBreweries();
     }
 
     render() {
 
         const { sectionHeader, breweries } = this.state;
 
-        const renderFeatures = Object.entries(breweries).map(brewery => {
+        const renderPopular = Object.entries(breweries).map(brewery => {
             const breweryListing = brewery[1];
             return(
                 <Card key={breweryListing.id} className="col mb-4">
@@ -58,11 +58,11 @@ class Featured extends Component {
                     <h2 className="pb-2 px-0 border-bottom col">{sectionHeader}</h2>
                 </div>
                 <div className="row row-cols-1 row-cols-md-3">
-                    {renderFeatures}
+                    {renderPopular}
                 </div>
             </section>
         );
     }
 }
 
-export default Featured;
+export default MostPopular;

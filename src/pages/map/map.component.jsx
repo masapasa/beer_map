@@ -11,8 +11,6 @@ const MAPBOX_TOKEN = mapKey;
 
 class Map extends Component {
 
-    _isMounted = false;
-
     constructor(props) {
         super(props);
         this.state = {
@@ -26,29 +24,52 @@ class Map extends Component {
             isLoading: true,
             breweries:[]
         }
+    }
 
-        axios.get( baseUrl )
-        .then(res => {
-          const breweries = res.data;
-          this.setState({ breweries });
-        })
-        .catch(function (error) {
-          console.log(error);
+    getMapBreweries = async () => {
+        await axios
+            .get( baseUrl )
+            .then(res => {
+                this.setState({ breweries: res.data });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    decodeEntities = (str) => {
+        return str.replace(/&#(\d+);/g, function(match, dec) {
+            return String.fromCharCode(dec);
         });
     }
 
     componentDidMount() {
-        this._isMounted = true;
+        this.getMapBreweries();
         this.setState({isLoading: false});
-    }
-
-    componentWillUnmount() {
-        this._isMounted = false;
     }
 
     render() {
 
         const { isLoading, viewport, breweries } = this.state;
+
+        const renderMarkers = Object.entries(breweries).map(brewery => {
+            const breweryListing = brewery[1];
+            return(
+                <Marker 
+                    key={breweryListing.id}
+                    latitude={parseFloat(breweryListing.acf.location.lat)}
+                    longitude={parseFloat(breweryListing.acf.location.long)} 
+                    offsetLeft={-20} 
+                    offsetTop={-10}
+                >   
+                    <button
+                        className='map-btn'
+                    >
+                        <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${this.decodeEntities(breweryListing.title.rendered)} Icon`}/>
+                    </button>
+                </Marker>
+            );
+        });
 
         if(isLoading) {
             return <Loader />;
@@ -79,24 +100,7 @@ class Map extends Component {
                             fitBoundsOptions={{maxZoom: 6}}
                             trackUserLocation={true}
                         />
-                        {
-                            breweries.map(
-                                brew => 
-                                <Marker 
-                                    key={brew.id}
-                                    latitude={parseFloat(brew.acf.location.lat)}
-                                    longitude={parseFloat(brew.acf.location.long)} 
-                                    offsetLeft={-20} 
-                                    offsetTop={-10}
-                                >   
-                                    <button
-                                        className='map-btn'
-                                    >
-                                        <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${brew.title.rendered} Icon`}/>
-                                    </button>
-                                </Marker>
-                            )
-                        }
+                        {renderMarkers}
                     </MapGL>
                     <MapSearch />
                 </section>

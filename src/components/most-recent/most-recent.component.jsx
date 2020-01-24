@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
 import axios from 'axios';
-import { featureUrl } from '../../shared/sharedKeys';
-import './featured.styles.scss';
+import { additionalUrl } from '../../shared/sharedKeys';
+import './most-recent.styles.scss';
 
-class Featured extends Component {
+class MostRecent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             breweries: [],
-            sectionHeader: 'Featured Breweries'
+            sectionHeader: 'Additional Breweries'
         }
     }
 
-    getFeaturedBreweries = async () => {
+    getAdditionalBreweries = async () => {
         await axios
-            .get( featureUrl )
+            .get( additionalUrl + '&filter[cat]=-1,-171' )
             .then(res => {
                 this.setState({ breweries: res.data });
             })
@@ -23,6 +23,21 @@ class Featured extends Component {
                 console.log(error);
             });
     };
+
+    shuffleArr = (array) => {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+        
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        
+        return array;
+    }
 
     decodeEntities = (str) => {
         return str.replace(/&#(\d+);/g, function(match, dec) {
@@ -32,15 +47,17 @@ class Featured extends Component {
 
     componentDidMount () {
         this.setState({isLoading: false});
-        this.getFeaturedBreweries();
+        this.getAdditionalBreweries();
     }
 
     render() {
 
         const { sectionHeader, breweries } = this.state;
 
-        const renderFeatures = Object.entries(breweries).map(brewery => {
+        const renderAdditional = Object.entries(breweries).map(brewery => {
             const breweryListing = brewery[1];
+
+
             return(
                 <Card key={breweryListing.id} className="col mb-4">
                     <CardBody>
@@ -58,11 +75,11 @@ class Featured extends Component {
                     <h2 className="pb-2 px-0 border-bottom col">{sectionHeader}</h2>
                 </div>
                 <div className="row row-cols-1 row-cols-md-3">
-                    {renderFeatures}
+                    {renderAdditional}
                 </div>
             </section>
         );
     }
 }
 
-export default Featured;
+export default MostRecent;

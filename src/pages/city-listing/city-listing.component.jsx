@@ -28,22 +28,26 @@ class CityListing extends Component {
             });
     };
 
+    decodeEntities = (str) => {
+        return str.replace(/&#(\d+);/g, function(match, dec) {
+            return String.fromCharCode(dec);
+        });
+    }
+
     componentDidMount () {
         this.setState({ isLoading: false });
         this.getCityBreweries();
     }
 
     render() {
-
         const { city, breweries } = this.state;
    
         const renderList = Object.entries(breweries).map(brewery => {
             const breweryListing = brewery[1];
             return(
                 <Card key={breweryListing.id} className="col-md-3 my-3 mx-3">
-                    
                     <CardBody>
-                        <CardTitle><h6>{breweryListing.title.rendered}</h6></CardTitle>
+                        <CardTitle><h6>{this.decodeEntities(breweryListing.title.rendered)}</h6></CardTitle>
                         <CardText></CardText>
                         <CardFooter></CardFooter>
                     </CardBody>
