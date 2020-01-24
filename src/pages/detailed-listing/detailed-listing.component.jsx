@@ -18,7 +18,6 @@ class DetailedListing extends Component {
             .get( detailedUrl + this.state.breweryId )
             .then(res => {
                 this.setState({ breweries: res.data });
-                console.log(this.state.breweries)
             })
             .catch(function (error) {
                 console.log(error);
@@ -37,9 +36,20 @@ class DetailedListing extends Component {
     }
 
     render() {
+
+        const { breweries } = this.state;
+
+        const testArr = Object.values(breweries);
+        console.log(testArr)
+        console.log(testArr[0]);
+        //console.log(breweries.title);
+        console.log(testArr[15].logo);
+   
+
         return(
             <section className='detailed-listing'>
                 <Carousel />
+
             </section>
         );
     }
