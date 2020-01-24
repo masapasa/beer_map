@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { additionalUrl } from '../../shared/sharedKeys';
 import './most-recent.styles.scss';
 
@@ -44,13 +45,15 @@ class MostRecent extends Component {
 
 
             return(
-                <Card key={breweryListing.id} className="col mb-4">
-                    <CardBody>
-                        <CardTitle><h6>{this.decodeEntities(breweryListing.title.rendered)}</h6></CardTitle>
-                        <CardText></CardText>
-                        <CardFooter></CardFooter>
-                    </CardBody>
-                </Card>
+                <Link to={`/detailed-listing/${breweryListing.id}`}>
+                    <Card key={breweryListing.id} className="col mb-4">
+                        <CardBody>
+                            <CardTitle><h6>{this.decodeEntities(breweryListing.title.rendered)}</h6></CardTitle>
+                            <CardText></CardText>
+                            <CardFooter></CardFooter>
+                        </CardBody>
+                    </Card>
+                </Link>
             );
         });
         

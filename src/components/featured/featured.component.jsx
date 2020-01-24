@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { featureUrl } from '../../shared/sharedKeys';
 import './featured.styles.scss';
 
@@ -42,13 +43,15 @@ class Featured extends Component {
         const renderFeatures = Object.entries(breweries).map(brewery => {
             const breweryListing = brewery[1];
             return(
-                <Card key={breweryListing.id} className="col mb-4">
-                    <CardBody>
-                        <CardTitle><h6>{this.decodeEntities(breweryListing.title.rendered)}</h6></CardTitle>
-                        <CardText></CardText>
-                        <CardFooter></CardFooter>
-                    </CardBody>
-                </Card>
+                <Link to={`/detailed-listing/${breweryListing.id}`}>
+                    <Card key={breweryListing.id} className="col mb-4">
+                        <CardBody>
+                            <CardTitle><h6>{this.decodeEntities(breweryListing.title.rendered)}</h6></CardTitle>
+                            <CardText></CardText>
+                            <CardFooter></CardFooter>
+                        </CardBody>
+                    </Card>
+                </Link>
             );
         });
         

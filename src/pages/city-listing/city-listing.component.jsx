@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Hero from '../../components/utilities/hero.component';
 import './city-listing.styles.scss';
 import { cityQuery } from '../../shared/sharedKeys';
@@ -45,13 +46,15 @@ class CityListing extends Component {
         const renderList = Object.entries(breweries).map(brewery => {
             const breweryListing = brewery[1];
             return(
-                <Card key={breweryListing.id} className="col-md-3 my-3 mx-3">
-                    <CardBody>
-                        <CardTitle><h6>{this.decodeEntities(breweryListing.title.rendered)}</h6></CardTitle>
-                        <CardText></CardText>
-                        <CardFooter></CardFooter>
-                    </CardBody>
-                </Card>
+                <Link to={`/detailed-listing/${breweryListing.id}`}>
+                    <Card key={breweryListing.id} className="col-md-3 my-3">
+                        <CardBody>
+                            <CardTitle><h6>{this.decodeEntities(breweryListing.title.rendered)}</h6></CardTitle>
+                            <CardText></CardText>
+                            <CardFooter></CardFooter>
+                        </CardBody>
+                    </Card>
+                </Link>
             );
         });
 
