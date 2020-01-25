@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, CardTitle, Col } from 'reactstrap';
+import { Container, Row, Card, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Hero from '../../components/utilities/hero.component';
@@ -38,8 +38,6 @@ class CityListing extends Component {
     render() {
         const { city, breweries } = this.state;
 
-        console.log(breweries);
-   
         const renderList = Object.entries(breweries).map(brewery => {
 
             const breweryListing = brewery[1];
@@ -65,12 +63,12 @@ class CityListing extends Component {
 
         return(
             <section className="city-listing">
-                <Hero headline={ city }/>
-                <div className="container mb-5">
-                    <div className="row">
+                <Hero headline={ city } />
+                <Container className="mb-5">
+                    <Row>
                         {renderList}
-                    </div>
-                </div>
+                    </Row>
+                </Container>
             </section>
         );
     }

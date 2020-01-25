@@ -13,7 +13,7 @@ const Homepage = props => {
             <Featured />
             <Cta headline={'Book a Tour'} content={'Tour text'} buttonText={'Book Now!'} />
             <MostPopular />
-            <Cta headline={'Find Events'} content={'Tour text'} buttonText={'See Events'} />
+            <Cta headline={'Find Events'} content={'Events text'} buttonText={'See Events'} />
             <MostRecent />
         </section>
     );

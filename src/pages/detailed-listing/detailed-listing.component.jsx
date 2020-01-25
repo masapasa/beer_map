@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
 import Carousel from '../../components/carousel/carousel.component';
+import Cta from '../../components/cta/cta.component';
 import { detailedUrl } from '../../shared/sharedKeys';
+import parse from 'html-react-parser';
 import './detailed-listing.styles.scss';
 
 class DetailedListing extends Component {
@@ -24,24 +27,70 @@ class DetailedListing extends Component {
             });
     };
 
-    decodeEntities = (str) => {
-        return str.replace(/&#(\d+);/g, function(match, dec) {
-            return String.fromCharCode(dec);
-        });
-    }
-
-    componentWillMount () {
-        this.getSingleBrewery();
-    }
-
     componentDidMount () {
+        this.getSingleBrewery();
         this.setState({isLoading: false});
     }
 
     render() {
+
+        const { breweries } = this.state;
+
+        const renderSingleBrewery = (apiData) => {
+            if(Object.keys(apiData).length > 0) {
+                return(
+                    <React.Fragment>
+                        <Carousel />
+                        <Container key={apiData.id}>
+                            <Row className="my-5">
+                                <Col md="8">
+                                    <h1 className="display-4">{parse(apiData.title.rendered)}</h1>
+                                </Col>
+                                <Col md="4">
+                                    <h4 className="border-bottom pb-2">Location</h4>
+                                    <p>{apiData.acf.location.address}</p>
+                                    <p>{apiData.acf.location.city}, Colorado {apiData.acf.location.zip_code}</p>
+                                    <p>{apiData.acf.location.phone_number}</p>
+                                </Col>
+                            </Row>
+                            <Row className="my-5">
+                                <Col md="6">
+                                    <h5 className="border-bottom pb-2">Description</h5>
+                                    <p>{ !apiData.content.rendered ? 'No Data' : parse(apiData.content.rendered) }</p>
+                                </Col>
+                                <Col md="6">
+                                    <h5 className="border-bottom pb-2">Specials</h5>
+                                    <p>{ !apiData.acf.specials ? 'No Data' : apiData.acf.specials }</p>
+                                </Col>
+                            </Row>
+                            <Row className="my-5">
+                                <Cta headline={'Find Events'} content={'Events text'} buttonText={'See Events'} />
+                            </Row>
+                            <Row className="my-5">
+                                <Col md="6">
+                                    <h6 className="border-bottom pb-2">On Tap</h6>
+                                    <p>{ !apiData.acf.beer ? 'No Data' : apiData.acf.beers }</p>
+                                </Col>
+                                <Col md="6">
+                                    <h6 className="border-bottom pb-2">Food Truck Schedule</h6>
+                                    <p>{ !apiData.acf.foodtrucks ? 'No Data' : apiData.acf.foodtrucks }</p>
+                                </Col>
+                            </Row>
+                            <Row className="my-5">
+                                <Cta headline={'Book a Tour'} content={'Tour text'} buttonText={'Book Now!'} />
+                            </Row>
+                        </Container>
+                    </React.Fragment> 
+                );
+            }
+            else {
+                return <div />;
+            }
+        }
+        
         return(
             <section className='detailed-listing'>
-                <Carousel />
+                {renderSingleBrewery(breweries)}
             </section>
         );
     }
