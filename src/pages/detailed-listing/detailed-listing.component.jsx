@@ -13,7 +13,7 @@ class DetailedListing extends Component {
         }
     }
 
-    getFeaturedBrewery = async () => {
+    getSingleBrewery = async () => {
         await axios
             .get( detailedUrl + this.state.breweryId )
             .then(res => {
@@ -30,26 +30,18 @@ class DetailedListing extends Component {
         });
     }
 
+    componentWillMount () {
+        this.getSingleBrewery();
+    }
+
     componentDidMount () {
         this.setState({isLoading: false});
-        this.getFeaturedBrewery();
     }
 
     render() {
-
-        const { breweries } = this.state;
-
-        const testArr = Object.values(breweries);
-        console.log(testArr)
-        console.log(testArr[0]);
-        //console.log(breweries.title);
-        console.log(testArr[15].logo);
-   
-
         return(
             <section className='detailed-listing'>
                 <Carousel />
-
             </section>
         );
     }

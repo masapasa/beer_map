@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Hero from '../../components/utilities/hero.component';
