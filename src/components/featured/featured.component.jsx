@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, CardTitle, Col } from 'reactstrap';
+import { Container, Row, Card, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { featureUrl } from '../../shared/sharedKeys';
@@ -57,13 +57,15 @@ class Featured extends Component {
         });
         
         return(
-            <section className="container py-3 my-5">
-                <div className="row mb-4 mobile-heading">
-                    <h2 className="pb-2 px-0 border-bottom col">{sectionHeader}</h2>
-                </div>
-                <div className="row row-cols-1 row-cols-md-3">
-                    {renderFeatures}
-                </div>
+            <section className="featured">
+                <Container className="py-3 my-5">
+                    <Row className="row mb-4 mobile-heading">
+                        <h2 className="pb-2 px-0 border-bottom col">{sectionHeader}</h2>
+                    </Row>
+                    <Row className="row-cols-1 row-cols-md-3">
+                        {renderFeatures}
+                    </Row>
+                </Container>
             </section>
         );
     }
