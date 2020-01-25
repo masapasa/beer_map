@@ -21,3 +21,16 @@
         }
     }
 }
+.card {
+    transition: all .15s ease-in;;
+    
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 400px) {
+        &:hover {
+            transform: scale(.95);
+        }
+    }
+}
