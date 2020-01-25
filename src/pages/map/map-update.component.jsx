@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
-
 export default function App() {
   const [viewport, setViewport] = useState({
     latitude: 45.4211,
