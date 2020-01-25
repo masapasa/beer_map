@@ -30,17 +30,6 @@ class CityListing extends Component {
             });
     };
 
-    decodeEntities = (str) => {
-        return str.replace(/&#(\d+);/g, function(match, dec) {
-            return String.fromCharCode(dec);
-        });
-    }
-
-    stripHtml = (str) =>  {
-        str = str.toString();
-        return str.replace(/<[^>]*>/g, '');
-    }
-
     componentDidMount () {
         this.setState({ isLoading: false });
         this.getCityBreweries();

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, CardTitle, CardFooter } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, Col } from 'reactstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { popularUrl } from '../../shared/sharedKeys';
+import parse from 'html-react-parser';
 import './most-popular.styles.scss';
 
 class MostPopular extends Component {
@@ -25,12 +26,6 @@ class MostPopular extends Component {
             });
     };
 
-    decodeEntities = (str) => {
-        return str.replace(/&#(\d+);/g, function(match, dec) {
-            return String.fromCharCode(dec);
-        });
-    }
-
     componentDidMount () {
         this.setState({isLoading: false});
         this.getPopularBreweries();
@@ -43,15 +38,21 @@ class MostPopular extends Component {
         const renderPopular = Object.entries(breweries).map(brewery => {
             const breweryListing = brewery[1];
             return(
-                <Link to={`/detailed-listing/${breweryListing.id}`}>
+                <Col md="4" className="mb-5">
                     <Card key={breweryListing.id} className="col mb-4">
                         <CardBody>
-                            <CardTitle><h6>{this.decodeEntities(breweryListing.title.rendered)}</h6></CardTitle>
-                            <CardText></CardText>
-                            <CardFooter></CardFooter>
+                            <CardTitle>
+                                <Link to={`/detailed-listing/${breweryListing.id}`}>
+                                    <h5>{parse(breweryListing.title.rendered)}</h5>
+                                </Link>
+                            </CardTitle>
+                            <CardText>{parse(breweryListing.content.rendered)}</CardText>
+                            <Link to={`/detailed-listing/${breweryListing.id}`} className="btn btn-secondary d-block">
+                                See Details
+                            </Link>
                         </CardBody>
                     </Card>
-                </Link>
+                </Col>
             );
         });
         

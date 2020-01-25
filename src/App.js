@@ -33,9 +33,9 @@ class App extends Component {
     }
     else {
       return(
-        <div>
+        <div className="wrapper">
           <Header />
-              <main role='main'>
+              <main role="main">
                 <Route render={({location}) => (
                   <TransitionGroup>
                   <CSSTransition key={location.key} classNames="fade" timeout={300}>
