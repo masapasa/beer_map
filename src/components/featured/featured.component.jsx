@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Card, CardText, CardBody, CardTitle, Col } from 'reactstrap';
+import { Container, Row, Card, CardBody, CardTitle, Col } from 'reactstrap';
 import Loader from '../utilities/loader.component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -42,15 +42,15 @@ class Featured extends Component {
 
         return(
             renderList.map(data => (
-                <Col md="4" className="mb-5">
-                    <Card key={data[1].id} className="col mb-4">
+                <Col key={data[1].id}  md="4" className="mb-5">
+                    <Card className="col mb-4">
                         <CardBody>
                             <CardTitle>
                                 <Link to={`/detailed-listing/${data[1].id}`}>
                                     <h5>{parse(data[1].title.rendered)}</h5>
                                 </Link>
                             </CardTitle>
-                            <CardText>{parse(data[1].content.rendered)}</CardText>
+                            {parse(data[1].content.rendered)}
                             <Link to={`/detailed-listing/${data[1].id}`} className="btn btn-secondary d-block">
                                 See Details
                             </Link>

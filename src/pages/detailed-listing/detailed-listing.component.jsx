@@ -9,6 +9,9 @@ import parse from 'html-react-parser';
 import './detailed-listing.styles.scss';
 
 class DetailedListing extends Component {
+
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -27,11 +30,6 @@ class DetailedListing extends Component {
                 console.log(error);
             });
     };
-
-    componentDidMount () {
-        this.getSingleBrewery();
-        this.setState({isLoading: false});
-    }
 
     renderSingleBrewery = apiData => {
         if(!Object.keys(apiData).length > 0) {
@@ -56,7 +54,7 @@ class DetailedListing extends Component {
                         <Row className="my-5">
                             <Col md="6">
                                 <h5 className="border-bottom pb-2">Description</h5>
-                                <p>{ !apiData.content.rendered ? 'No Data' : parse(apiData.content.rendered) }</p>
+                                { !apiData.content.rendered ? 'No Data' : parse(apiData.content.rendered) }
                             </Col>
                             <Col md="6">
                                 <h5 className="border-bottom pb-2">Specials</h5>
@@ -83,6 +81,16 @@ class DetailedListing extends Component {
                 </React.Fragment> 
             );
         }
+    }
+
+    componentDidMount () {
+        this._isMounted = true;
+        this.getSingleBrewery();
+        this.setState({isLoading: false});
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {

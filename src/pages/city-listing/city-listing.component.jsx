@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Card, CardText, CardBody, CardTitle, Col } from 'reactstrap';
+import { Container, Row, Card, CardBody, CardTitle, Col } from 'reactstrap';
 import Loader from '../../components/utilities/loader.component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,8 @@ import { cityQuery } from '../../shared/sharedKeys';
 import parse from 'html-react-parser';
 
 class CityListing extends Component {
+
+    _isMounted = false;
 
     constructor(props) {
         super(props);
@@ -31,11 +33,6 @@ class CityListing extends Component {
             });
     };
 
-    componentDidMount () {
-        this.setState({ isLoading: false });
-        this.getCityBreweries();
-    }
-
     renderCityList = apiData => {
 
         const renderList = Object.entries(apiData);
@@ -46,15 +43,15 @@ class CityListing extends Component {
 
         return(
             renderList.map(data => ( 
-                <Col md="4" className="mb-5">
-                    <Card key={data[1].id}>
+                <Col key={data[1].id} md="4" className="mb-5">
+                    <Card>
                         <CardBody>
                             <CardTitle>
                                 <Link to={`/detailed-listing/${data[1].id}`}>
                                     <h5>{parse(data[1].title.rendered)}</h5>
                                 </Link>
                             </CardTitle>
-                            <CardText>{parse(data[1].content.rendered)}</CardText>
+                            {parse(data[1].content.rendered)}
                             <Link to={`/detailed-listing/${data[1].id}`} className="btn btn-secondary d-block">
                                 See Location Details
                             </Link>
@@ -63,6 +60,16 @@ class CityListing extends Component {
                 </Col>
             ))
         );
+    }
+
+    componentDidMount () {
+        this._isMounted = true;
+        this.setState({ isLoading: false });
+        this.getCityBreweries();
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {
