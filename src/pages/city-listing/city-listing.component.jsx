@@ -17,8 +17,7 @@ class CityListing extends Component {
         this.state = {
           breweries: [],
           city: this.props.location.state.cityName,
-          cityQ: this.props.location.state.cityId,
-          isLoading: true
+          cityQ: this.props.location.state.cityId
         };
     }
 
@@ -64,7 +63,6 @@ class CityListing extends Component {
 
     componentDidMount () {
         this._isMounted = true;
-        this.setState({ isLoading: false });
         this.getCityBreweries();
     }
 

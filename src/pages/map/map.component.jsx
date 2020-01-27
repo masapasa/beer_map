@@ -21,7 +21,6 @@ class Map extends Component {
                 bearing: 0,
                 pitch: 0
             },
-            isLoading: true,
             showPopup: true,
             breweries:[]
         }
@@ -32,7 +31,6 @@ class Map extends Component {
             .get( baseUrl )
             .then(res => {
                 this.setState({ breweries: res.data });
-                console.log(this.state.breweries)
             })
             .catch(function (error) {
                 console.log(error);
@@ -45,46 +43,50 @@ class Map extends Component {
         });
     }
 
+    renderMarkers = apiData => {
+
+        const renderMarkers= Object.entries(apiData);
+
+        console.log(renderMarkers);
+
+        if(!renderMarkers.length) {
+            return <Loader />;
+        }
+
+        return(
+            renderMarkers.map(data => (
+                <Marker 
+                    key={data[1].id}
+                    latitude={parseFloat(data[1].acf.location.lat)}
+                    longitude={parseFloat(data[1].acf.location.long)} 
+                    offsetLeft={-20} 
+                    offsetTop={-10}
+                >   
+                    <button
+                        className='map-btn'
+                    >
+                        <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${this.decodeEntities(data[1].title.rendered)} Icon`}/>
+                    </button>
+                </Marker>
+            ))
+        );
+    }
+
     componentDidMount() {
         this.getMapBreweries();
-        this.setState({isLoading: false});
     }
 
     render() {
 
-        const { isLoading, viewport, breweries } = this.state;
+        const { viewport, breweries } = this.state;
 
-        const renderMarkers = Object.entries(breweries).map(brewery => {
-            const breweryListing = brewery[1];
-            return(
-                <React.Fragment>
-                    <Marker 
-                        key={breweryListing.id}
-                        latitude={parseFloat(breweryListing.acf.location.lat)}
-                        longitude={parseFloat(breweryListing.acf.location.long)} 
-                        offsetLeft={-20} 
-                        offsetTop={-10}
-                    >   
-                        <button
-                            className='map-btn'
-                        >
-                            <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${this.decodeEntities(breweryListing.title.rendered)} Icon`}/>
-                        </button>
-                    </Marker>
-                </React.Fragment>
-            );
-        });
-
-        if(isLoading) {
-            return <Loader />;
-        }
-        else {
-            return(
-                <section className='map'>
+        return(
+            <React.Fragment>
+                <section className='map jumbotron-fluid d-flex align-items-start'>
                     <MapGL
                         {...viewport}
-                        width="95vw"
-                        height="100vh"
+                        width="100vw"
+                        height="75vh"
                         mapStyle="mapbox://styles/selceeus/ck5fzn67505341ilby3v1l6xs"
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={MAPBOX_TOKEN}
@@ -101,15 +103,15 @@ class Map extends Component {
                                 overflow: 'hidden'
                             }}
                             positionOptions={{enableHighAccuracy: true}}
-                            fitBoundsOptions={{maxZoom: 6}}
+                            fitBoundsOptions={{maxZoom: 5}}
                             trackUserLocation={true}
                         />
-                        {renderMarkers}
+                        {this.renderMarkers(breweries)}
                     </MapGL>
-                    <MapSearch />
                 </section>
-            );
-        }
+                <MapSearch />
+            </React.Fragment>
+        );
     }
 }
 

@@ -27,11 +27,6 @@ class MostPopular extends Component {
             });
     };
 
-    componentDidMount () {
-        this.setState({isLoading: false});
-        this.getPopularBreweries();
-    }
-
     renderPopular = apiData => {
 
         const renderList = Object.entries(apiData);
@@ -60,6 +55,11 @@ class MostPopular extends Component {
             )
         ))
 
+    }
+
+    componentDidMount () {
+        this.setState({isLoading: false});
+        this.getPopularBreweries();
     }
 
     render() {

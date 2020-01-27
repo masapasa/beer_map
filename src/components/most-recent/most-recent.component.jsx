@@ -27,11 +27,6 @@ class MostRecent extends Component {
             });
     };
 
-    componentDidMount () {
-        this.setState({isLoading: false});
-        this.getAdditionalBreweries();
-    }
-
     renderAdditional = apiData => {
 
         const renderList = Object.entries(apiData);
@@ -60,6 +55,11 @@ class MostRecent extends Component {
             )
         ))
 
+    }
+
+    componentDidMount () {
+        this.setState({isLoading: false});
+        this.getAdditionalBreweries();
     }
 
     render() {

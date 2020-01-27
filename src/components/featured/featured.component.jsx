@@ -27,11 +27,6 @@ class Featured extends Component {
             });
     };
 
-    componentDidMount () {
-        this.setState({isLoading: false});
-        this.getFeaturedBreweries();
-    }
-
     renderFeatures = apiData => {
 
         const renderList = Object.entries(apiData);
@@ -60,6 +55,11 @@ class Featured extends Component {
             )
         ))
 
+    }
+
+    componentDidMount () {
+        this.setState({isLoading: false});
+        this.getFeaturedBreweries();
     }
 
     render() {
