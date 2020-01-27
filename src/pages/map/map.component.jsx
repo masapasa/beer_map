@@ -5,6 +5,7 @@ import MapGL, { GeolocateControl, NavigationControl, Marker } from 'react-map-gl
 import Loader from '../../components/utilities/loader.component';
 import MapSearch from '../../components/map-search/map-search.component';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import parse from 'html-react-parser';
 import './map.styles.scss';
 
 const MAPBOX_TOKEN = mapKey;
@@ -37,12 +38,6 @@ class Map extends Component {
             });
     };
 
-    decodeEntities = (str) => {
-        return str.replace(/&#(\d+);/g, function(match, dec) {
-            return String.fromCharCode(dec);
-        });
-    }
-
     renderMarkers = apiData => {
 
         const renderMarkers= Object.entries(apiData);
@@ -65,7 +60,7 @@ class Map extends Component {
                     <button
                         className='map-btn'
                     >
-                        <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${this.decodeEntities(data[1].title.rendered)} Icon`}/>
+                        <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${parse(data[1].title.rendered)} Icon`}/>
                     </button>
                 </Marker>
             ))
@@ -97,8 +92,8 @@ class Map extends Component {
                         <GeolocateControl
                             style={{
                                 position: 'absolute',
-                                top: 0,
-                                left: 0,
+                                top: 100,
+                                right: 0,
                                 margin: 10,
                                 overflow: 'hidden'
                             }}
