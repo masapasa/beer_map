@@ -4,7 +4,7 @@ import './map-search.styles.scss';
 
 const MapSearch = () => {
     return(
-        <section class='map-search'>
+        <section className='map-search'>
             <Container>
                 <Row>
                 Map Search

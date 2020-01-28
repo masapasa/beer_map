@@ -1,4 +1,5 @@
 export const baseUrl = 'https://coloradobeermap.com/wp-json/wp/v2/brewery?per_page=100';
+export const offsetUrl = 'https://coloradobeermap.com/wp-json/wp/v2/brewery?per_page=100&offset=100';
 export const featureUrl = 'https://coloradobeermap.com/wp-json/wp/v2/brewery?categories=1';
 export const popularUrl = 'https://coloradobeermap.com/wp-json/wp/v2/brewery?categories=171';
 export const additionalUrl = 'https://coloradobeermap.com/wp-json/wp/v2/brewery?per_page=6';

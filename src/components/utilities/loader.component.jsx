@@ -1,6 +1,5 @@
 import React from 'react';
 import { Spinner } from 'reactstrap';
-import { Fade } from 'react-animation-components';
 import './loader.styles.scss';
 
 const Loader = props => {

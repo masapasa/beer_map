@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { baseUrl, mapKey } from '../../shared/sharedKeys';
+import { baseUrl, offsetUrl, mapKey } from '../../shared/sharedKeys';
 import MapGL, { GeolocateControl, NavigationControl, Marker } from 'react-map-gl';
 import Loader from '../../components/utilities/loader.component';
 import MapSearch from '../../components/map-search/map-search.component';
@@ -28,21 +28,22 @@ class Map extends Component {
     }
 
     getMapBreweries = async () => {
-        await axios
-            .get( baseUrl )
-            .then(res => {
-                this.setState({ breweries: res.data });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
+        await axios.all([ 
+            axios.get(baseUrl),
+            axios.get(offsetUrl)
+      ])
+      .then(axios.spread((chunkOne, chunkTwo) => {
+        const chunkConcat = [...chunkOne.data,...chunkTwo.data];
+        this.setState({ breweries: chunkConcat });
+      }))
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
 
     renderMarkers = apiData => {
 
         const renderMarkers= Object.entries(apiData);
-
-        console.log(renderMarkers);
 
         if(!renderMarkers.length) {
             return <Loader />;
