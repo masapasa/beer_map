@@ -22,7 +22,6 @@ class Map extends Component {
                 bearing: 0,
                 pitch: 0
             },
-            showPopup: true,
             breweries:[]
         }
     }
@@ -33,8 +32,7 @@ class Map extends Component {
             axios.get(offsetUrl)
       ])
       .then(axios.spread((chunkOne, chunkTwo) => {
-        const chunkConcat = [...chunkOne.data,...chunkTwo.data];
-        this.setState({ breweries: chunkConcat });
+        this.setState({ breweries: [...chunkOne.data,...chunkTwo.data] });
       }))
       .catch(function (error) {
         console.log(error);
@@ -58,8 +56,11 @@ class Map extends Component {
                     offsetLeft={-20} 
                     offsetTop={-10}
                 >   
-                    <button
+                    <button 
                         className='map-btn'
+                        onClick={e => {
+                            e.preventDefault();
+                        }}
                     >
                         <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${parse(data[1].title.rendered)} Icon`}/>
                     </button>
