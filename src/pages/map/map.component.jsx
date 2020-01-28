@@ -41,7 +41,6 @@ class Map extends Component {
       });
     }
 
-
     renderMarkers = apiData => {
 
         const renderMarkers= Object.entries(apiData);
