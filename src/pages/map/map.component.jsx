@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { baseUrl, offsetUrl, mapKey } from '../../shared/sharedKeys';
-import MapGL, { GeolocateControl, NavigationControl, Marker } from 'react-map-gl';
+import MapGL, { GeolocateControl, NavigationControl, Marker, Popup } from 'react-map-gl';
 import Loader from '../../components/utilities/loader.component';
 import MapSearch from '../../components/map-search/map-search.component';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -22,8 +22,9 @@ class Map extends Component {
                 bearing: 0,
                 pitch: 0
             },
+            popupInfo: null,
             breweries:[]
-        }
+        };
     }
 
     getMapBreweries = async () => {
@@ -39,8 +40,7 @@ class Map extends Component {
       });
     }
 
-    renderMarkers = apiData => {
-
+    renderUIElements = apiData => {
         const renderMarkers= Object.entries(apiData);
 
         if(!renderMarkers.length) {
@@ -49,22 +49,39 @@ class Map extends Component {
 
         return(
             renderMarkers.map(data => (
-                <Marker 
-                    key={data[1].id}
-                    latitude={parseFloat(data[1].acf.location.lat)}
-                    longitude={parseFloat(data[1].acf.location.long)} 
-                    offsetLeft={-20} 
-                    offsetTop={-10}
-                >   
-                    <button 
-                        className='map-btn'
-                        onClick={e => {
-                            e.preventDefault();
-                        }}
-                    >
-                        <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${parse(data[1].title.rendered)} Icon`}/>
-                    </button>
-                </Marker>
+                <div key={data[1].id}>
+                    <Marker 
+                        latitude={parseFloat(data[1].acf.location.lat)}
+                        longitude={parseFloat(data[1].acf.location.long)} 
+                        offsetLeft={-20} 
+                        offsetTop={-10}
+                    >   
+                        <button 
+                            className='map-btn'
+                            onClick={e => {
+                                e.preventDefault();
+                                this.setState({ popupInfo: data[1] });
+                                console.log(data[1])
+                            }}
+                        >
+                            <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${parse(data[1].title.rendered)} Icon`}/>
+                        </button>
+                    </Marker>
+                    {this.state.popupInfo && ( 
+                        <Popup
+                            tipSize={5}
+                            anchor="top"
+                            latitude={parseFloat(this.state.popupInfo.acf.location.lat)}
+                            longitude={parseFloat(this.state.popupInfo.acf.location.long)}
+                            closeOnClick={false}
+                            onClose={() => this.setState({ popupInfo: null })}
+                        >
+                        
+                            {parse(this.state.popupInfo.title.rendered)}
+
+                        </Popup>
+                    )}
+               </div>
             ))
         );
     }
@@ -78,7 +95,7 @@ class Map extends Component {
         const { viewport, breweries } = this.state;
 
         return(
-            <React.Fragment>
+            <div>
                 <section className='map jumbotron-fluid d-flex align-items-start'>
                     <MapGL
                         {...viewport}
@@ -103,11 +120,11 @@ class Map extends Component {
                             fitBoundsOptions={{maxZoom: 5}}
                             trackUserLocation={true}
                         />
-                        {this.renderMarkers(breweries)}
+                        {this.renderUIElements(breweries)}
                     </MapGL>
                 </section>
                 <MapSearch />
-            </React.Fragment>
+            </div>
         );
     }
 }
