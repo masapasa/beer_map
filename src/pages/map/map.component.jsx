@@ -42,6 +42,7 @@ class Map extends Component {
 
     renderUIElements = apiData => {
         const renderMarkers= Object.entries(apiData);
+        const { popupInfo } = this.state;
 
         if(!renderMarkers.length) {
             return <Loader />;
@@ -67,18 +68,19 @@ class Map extends Component {
                             <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${parse(data[1].title.rendered)} Icon`}/>
                         </button>
                     </Marker>
-                    {this.state.popupInfo && ( 
+                    {popupInfo && ( 
                         <Popup
-                            tipSize={5}
+                            tipSize={10}
                             anchor="top"
-                            latitude={parseFloat(this.state.popupInfo.acf.location.lat)}
-                            longitude={parseFloat(this.state.popupInfo.acf.location.long)}
+                            offsetTop={35}
+                            latitude={parseFloat(popupInfo.acf.location.lat)}
+                            longitude={parseFloat(popupInfo.acf.location.long)}
                             closeOnClick={false}
                             onClose={() => this.setState({ popupInfo: null })}
                         >
                         
-                            {parse(this.state.popupInfo.title.rendered)}
-
+                            <h5>{parse(popupInfo.title.rendered)}</h5>
+                            <a href={popupInfo.acf.location.website} target="_blank" rel="noopener noreferrer">Website</a>
                         </Popup>
                     )}
                </div>
