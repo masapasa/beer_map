@@ -22,10 +22,21 @@
     }
 }
 .card {
-    transition: all .15s ease-in;;
+    transition: all .15s ease-in;
+    padding: .05vw;
+    border-radius:1px;
+    border-color: rgba(0,0,0,.05);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.03);
     
     &:hover {
         transform: scale(1.05);
+    }
+
+    &-title {
+
+        h5 {
+            text-transform: uppercase;
+        }
     }
 
     @media (max-width: 400px) {
@@ -33,4 +44,10 @@
             transform: scale(.95);
         }
     }
+}
+.jumbotron {
+    padding: 1.5rem 2rem;
+}
+.display-3 {
+    font-size: 3.5rem;
 }

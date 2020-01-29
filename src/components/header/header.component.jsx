@@ -148,14 +148,8 @@ class Header extends Component {
                                     <NavLink className="nav-link" to="/map">Map</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/contact">Contact</NavLink>
-                                </NavItem>
-                                <NavItem>
                                     <NavLink className="nav-link" to="/sign-up">Sign Up</NavLink>
                                 </NavItem>
-                                <Button outline size="sm" onClick={this.toggleModal}>
-                                    <i className="fa fa-angle-right" aria-hidden="true" /> Login
-                                </Button>
                             </Nav>
                         </Collapse>
                     </div>
