@@ -1,3 +1,6 @@
+h2 {
+    text-transform:uppercase;
+}
 .fade {
 
     &-enter {
@@ -30,13 +33,29 @@
     
     &:hover {
         transform: scale(1.05);
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     &-title {
 
+        a {
+            color:#000;
+            transition: all .15s ease-in;
+
+            &:hover {
+                text-decoration:  none;
+                opacity: .7;
+            }
+        }
+
         h5 {
             text-transform: uppercase;
         }
+    }
+
+    &-footer {
+        padding:0;
+        border:none;
     }
 
     @media (max-width: 400px) {
@@ -50,4 +69,10 @@
 }
 .display-3 {
     font-size: 3.5rem;
+}
+.btn {
+    text-transform: uppercase;
+    padding: .8rem .75rem .9rem;
+    border-radius:0;
+    border:none;
 }

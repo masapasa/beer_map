@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Card, CardBody, CardTitle, Col } from 'reactstrap';
+import { Container, Row, Card, CardBody, CardTitle, CardFooter, Col } from 'reactstrap';
 import Loader from '../utilities/loader.component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -38,7 +38,7 @@ class MostPopular extends Component {
         return(
             renderList.map(data => (
                 <Col key={data[1].id} md="4" className="mb-5">
-                    <Card className="col mb-4">
+                    <Card className="col mb-4 h-100">
                         <CardBody>
                             <CardTitle>
                                 <Link to={`/detailed-listing/${data[1].id}`}>
@@ -46,10 +46,12 @@ class MostPopular extends Component {
                                 </Link>
                             </CardTitle>
                             {parse(data[1].content.rendered)}
+                        </CardBody>
+                        <CardFooter>
                             <Link to={`/detailed-listing/${data[1].id}`} className="btn btn-secondary d-block">
                                 See Details
                             </Link>
-                        </CardBody>
+                        </CardFooter>
                     </Card>
                 </Col>
             )
@@ -72,7 +74,7 @@ class MostPopular extends Component {
                     <Row className="row mb-4 mobile-heading">
                         <h2 className="pb-2 px-0 border-bottom col">{sectionHeader}</h2>
                     </Row>
-                    <Row>
+                    <Row className="card-group">
                         {this.renderPopular(breweries)}
                     </Row>
                 </Container>

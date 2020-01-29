@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Card, CardBody, CardTitle, Col } from 'reactstrap';
+import { Container, Row, Card, CardBody, CardTitle, CardFooter, Col } from 'reactstrap';
 import Loader from '../../components/utilities/loader.component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -42,8 +42,8 @@ class CityListing extends Component {
 
         return(
             renderList.map(data => ( 
-                <Col key={data[1].id} md="4" className="mb-5">
-                    <Card>
+                <Col key={data[1].id} className="mb-5">
+                    <Card className="h-100">
                         <CardBody>
                             <CardTitle>
                                 <Link to={`/detailed-listing/${data[1].id}`}>
@@ -51,10 +51,12 @@ class CityListing extends Component {
                                 </Link>
                             </CardTitle>
                             {parse(data[1].content.rendered)}
+                        </CardBody>
+                        <CardFooter>
                             <Link to={`/detailed-listing/${data[1].id}`} className="btn btn-secondary d-block">
                                 See Location Details
                             </Link>
-                        </CardBody>
+                        </CardFooter>
                     </Card>
                 </Col>
             ))
@@ -79,7 +81,11 @@ class CityListing extends Component {
                 <Hero headline={ city } />
                 <Container className="mb-5">
                     <Row>
-                        {this.renderCityList(breweries)}
+                        <Col md="7">
+                        </Col>
+                        <Col md="4" className="col-scroll">
+                            {this.renderCityList(breweries)}
+                        </Col>
                     </Row>
                 </Container>
             </section>
