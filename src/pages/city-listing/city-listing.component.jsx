@@ -4,7 +4,7 @@ import Loader from '../../components/utilities/loader.component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Hero from '../../components/utilities/hero.component';
-import CityListingMap from '../../components/city-listing-map/city-listing-map.component';
+import CityHeader from '../../components/city-header/city-header.component';
 import { cityQuery } from '../../shared/sharedKeys';
 import parse from 'html-react-parser';
 import './city-listing.styles.scss';
@@ -20,6 +20,7 @@ class CityListing extends Component {
           city: this.props.location.state.cityName,
           cityQ: this.props.location.state.cityId
         };
+
     }
 
     getCityBreweries = async () => {
@@ -42,8 +43,8 @@ class CityListing extends Component {
         }
 
         return(
-            renderList.map(data => ( 
-                <Col key={data[1].id} className="mb-5">
+            renderList.map((data, index) => ( 
+                <Col key={data[1].id} md="4" className="mb-5">
                     <Card className="h-100">
                         <CardBody>
                             <CardTitle>
@@ -80,14 +81,10 @@ class CityListing extends Component {
         return(
             <section className="city-listing">
                 <Hero headline={ city } />
+                <CityHeader />
                 <Container className="mb-5">
                     <Row>
-                        <Col md="7">
-                            <CityListingMap breweryLocation={breweries} />
-                        </Col>
-                        <Col md="4" className="col-scroll">
-                            {this.renderCityList(breweries)}
-                        </Col>
+                        {this.renderCityList(breweries)}
                     </Row>
                 </Container>
             </section>
