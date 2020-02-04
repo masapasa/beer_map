@@ -1,0 +1,38 @@
+.map {
+    height: 75vh;
+    
+    &-icon {
+        width:1.5em;
+    }
+    
+    &-btn {
+        background:transparent;
+        border:none;
+        outline:none;
+    }
+}
+.mapboxgl-user-location-dot {
+    background-color: red;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+}
+.mapboxgl-user-location-dot::before {
+    background-color: red;
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+}
+.mapboxgl-user-location-dot::after {
+    border-radius: 50%;
+    border: 2px solid #fff;
+    content: '';
+    height: 15px;
+    left: -2px;
+    position: absolute;
+    top: -2px;
+    width: 15px;
+}

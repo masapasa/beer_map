@@ -4,9 +4,10 @@ import Loader from '../../components/utilities/loader.component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Hero from '../../components/utilities/hero.component';
-import './city-listing.styles.scss';
+import CityListingMap from '../../components/city-listing-map/city-listing-map.component';
 import { cityQuery } from '../../shared/sharedKeys';
 import parse from 'html-react-parser';
+import './city-listing.styles.scss';
 
 class CityListing extends Component {
 
@@ -82,6 +83,7 @@ class CityListing extends Component {
                 <Container className="mb-5">
                     <Row>
                         <Col md="7">
+                            <CityListingMap breweryLocation={breweries} />
                         </Col>
                         <Col md="4" className="col-scroll">
                             {this.renderCityList(breweries)}
