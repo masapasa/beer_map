@@ -11,28 +11,78 @@
         outline:none;
     }
 }
-.mapboxgl-user-location-dot {
-    background-color: red;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
-}
-.mapboxgl-user-location-dot::before {
-    background-color: red;
-    content: '';
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    position: absolute;
-}
-.mapboxgl-user-location-dot::after {
-    border-radius: 50%;
-    border: 2px solid #fff;
-    content: '';
-    height: 15px;
-    left: -2px;
-    position: absolute;
-    top: -2px;
-    width: 15px;
+.mapboxgl {
+
+    &-popup {
+        width:300px;
+        padding:15px;
+
+        &-content {
+            border-radius: 0;
+            box-shadow:none;
+            padding-right:1em;
+            padding-left:1.25em;
+            
+            h6 {
+                margin-top:10px;
+                text-transform:uppercase;
+            }
+
+            p {
+                font-size: .7rem;
+                line-height:1.5;
+            }
+
+            a {
+                transition: .25s all ease-in;
+                display:block;
+                text-align:right;
+
+                &:hover {
+                    opacity:.6;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        &-close {
+
+            &-button {
+                padding-right:.5em;
+            }
+        }
+    }
+
+    &-user {
+
+        &-location {
+
+            &-dot {
+                background-color: red;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+
+                &:before {
+                    background-color: red;
+                    content: '';
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                    position: absolute;
+                }
+                &:after {
+                    border-radius: 50%;
+                    border: 2px solid #fff;
+                    content: '';
+                    height: 15px;
+                    left: -2px;
+                    position: absolute;
+                    top: -2px;
+                    width: 15px;
+                }
+            }
+        }
+    }
 }

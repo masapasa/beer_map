@@ -78,9 +78,9 @@ class Map extends Component {
                             closeOnClick={false}
                             onClose={() => this.setState({ popupInfo: null })}
                         >
-                        
                             <h6>{parse(popupInfo.title.rendered)}</h6>
-                            <a href={popupInfo.acf.location.website} target="_blank" rel="noopener noreferrer">Website</a>
+                            { popupInfo.content.rendered ? <p>{parse(popupInfo.content.rendered)}</p> : '' }
+                            { popupInfo.acf.location.website ?  <a href={popupInfo.acf.location.website} target="_blank" rel="noopener noreferrer">Website</a> : '' }
                         </Popup>
                     )}
                </div>
