@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Card, CardBody, CardTitle, CardFooter, Col } from 'reactstrap';
+import { Container, Row, Card, CardImg, CardBody, CardTitle, CardFooter, Col } from 'reactstrap';
 import Loader from '../utilities/loader.component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -36,9 +36,10 @@ class Featured extends Component {
         }
 
         return(
-            renderList.map(data => (
+            renderList.map((data, index) => (
                 <Col key={data[1].id}  md="4" className="mb-5">
                     <Card className="col mb-4 h-100">
+                        <CardImg top width="100%" src={`/assets/slider-${index + 1}.jpg`} alt={parse(data[1].title.rendered)} />
                         <CardBody>
                             <CardTitle>
                                 <Link to={`/detailed-listing/${data[1].id}`}>
