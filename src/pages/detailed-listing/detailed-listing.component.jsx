@@ -31,7 +31,30 @@ class DetailedListing extends Component {
             });
     };
 
+    renderRow = apiData => {
+
+        if(apiData.content.rendered || apiData.acf.specials) {
+            return(
+                <Row className="my-5">
+                { apiData.content.rendered ? ` ` : ''}
+                <Col>
+                }      <h5 className="border-bottom pb-2">Description</h5>
+                    { parse(apiData.content.rendered) }
+                </Col>
+            
+            { apiData.acf.specials ? `` : ''}
+                <Col>
+                    <h5 className="border-bottom pb-2">Specials</h5>
+                    <p>{ apiData.acf.specials }</p>
+                </Col>
+            
+            </Row>
+            );
+        }
+    }
+
     renderSingleBrewery = apiData => {
+
         if(!Object.keys(apiData).length > 0) {
             return <Loader />;
         }
@@ -52,22 +75,21 @@ class DetailedListing extends Component {
                             </Col>
                         </Row>
 
-                        { apiData.content.rendered || apiData.acf.specials ? `
-                            <Row className="my-5">
-                                ${ apiData.content.rendered ? ` 
-                                    <Col>
-                                        <h5 className="border-bottom pb-2">Description</h5>
-                                        ${ parse(apiData.content.rendered) }
-                                    </Col>
-                                ` : ''}
-                                ${ apiData.acf.specials ? `
-                                    <Col>
-                                        <h5 className="border-bottom pb-2">Specials</h5>
-                                        <p>${ apiData.acf.specials }</p>
-                                    </Col>
-                                ` : ''}
-                            </Row>
-                        ` : ''}
+
+                        <Row className="my-5">
+                            { apiData.content.rendered ? ` 
+                                <Col>
+                                    <h5 className="border-bottom pb-2">Description</h5>
+                                    ${ parse(apiData.content.rendered) }
+                                </Col>
+                            ` : ''}
+                            { apiData.acf.specials ? `
+                                <Col>
+                                    <h5 className="border-bottom pb-2">Specials</h5>
+                                    <p>${ apiData.acf.specials }</p>
+                                </Col>
+                            ` : ''}
+                        </Row>
                         
                         <Row className="my-5">
                             <Cta headline={'Find Events'} content={'Events text'} buttonText={'See Events'} />
