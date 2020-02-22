@@ -7,6 +7,7 @@ import MapSearch from '../../components/map-search/map-search.component';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import parse from 'html-react-parser';
 import './map.styles.scss';
+import SearchBox from './SearchBox';
 
 const MAPBOX_TOKEN = mapKey;
 
@@ -100,6 +101,7 @@ class Map extends Component {
             <div>
                 <section className='map jumbotron-fluid d-flex align-items-start'>
                     <MapGL
+                    
                         {...viewport}
                         width="100vw"
                         height="75vh"
@@ -109,6 +111,9 @@ class Map extends Component {
                     >
                         <div style={{position: 'absolute', top: 10, right: 10}}>
                                 <NavigationControl />
+                        </div>
+                        <div style={{position: 'absolute', top: 10, right: 40}}>
+                                <SearchBox />
                         </div>
                         <GeolocateControl
                             style={{

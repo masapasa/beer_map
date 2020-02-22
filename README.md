@@ -1,1 +1,1 @@
-## Colorado Beer Map built with React
+## Beer Map built with React
