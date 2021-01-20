@@ -10,7 +10,7 @@
     "bootstrap": "^4.4.1",
     "dotenv": "8.2.0",
     "font-awesome": "^4.7.0",
-    "gsap": "^3.0.4",
+    "gsap": "^3.6.0",
     "html-react-parser": "^0.10.0",
     "mapbox-gl": "^1.6.1",
     "node-sass": "^4.13.0",
